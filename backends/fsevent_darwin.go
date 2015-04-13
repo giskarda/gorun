@@ -3,15 +3,16 @@ package backends
 import (
 	"log"
 )
+
 /*
 #cgo CFLAGS: -Wno-format
 #cgo LDFLAGS: -framework CoreServices
 #include "stdio.h"
-#include "fsevent.h"
+#include "fsevent_darwin.h"
 */
 import "C"
 
-func RunDarwin(gorunconfig GorunConfig) {
+func Run(gorunconfig GorunConfig) {
 
 	path := C.CString(*gorunconfig.MonitoredPath)
 	mypath := C.SetMonitoredPath(path)
