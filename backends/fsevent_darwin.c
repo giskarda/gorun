@@ -1,5 +1,5 @@
 #include "stdio.h"
-#include "fsevent.h"
+#include "fsevent_darwin.h"
 
 
 CFStringRef SetMonitoredPath(char *path) {

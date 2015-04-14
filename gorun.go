@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"log"
-	"runtime"
 
 	"github.com/giskarda/gorun/backends"
 )
@@ -11,10 +10,9 @@ import (
 var (
 	verbose = flag.Bool("verbose", false, "Run gorun in verbose mode")
 
-	path    = flag.String("path", "/tmp", "Monitored path")
-	cmd     = flag.String("cmd", "go build", "Perform command on any file change")
+	path = flag.String("path", "/tmp", "Monitored path")
+	cmd  = flag.String("cmd", "go build", "Perform command on any file change")
 )
-
 
 func main() {
 	flag.Parse()
@@ -24,11 +22,5 @@ func main() {
 	gorunconfig.Cmd = cmd
 
 	log.Println("Starting gorun")
-	switch goos := runtime.GOOS; {
-	case "darwin" == goos:
-		log.Println("OS: Darwin")
-		backends.RunDarwin(gorunconfig)
-	default:
-		log.Fatal("Couldn't identify OperatingSystem via runtime.GOOS")
-	}
+	backends.Run(gorunconfig)
 }
